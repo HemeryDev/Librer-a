@@ -2,19 +2,15 @@ package com.sena.first_project.navegation
 
 import kotlinx.serialization.Serializable
 
-// ==========================================
-// FLUJO 1: CATÁLOGO Y RESERVA DE LIBROS
-// ==========================================
-
-// Pantalla 1: Bienvenida
+// P1: Bienvenida
 @Serializable
 data object RutaInicio
 
-// Pantalla 2: Lista de libros disponibles
+// P2: Lista libros
 @Serializable
 data object RutaListaLibros
 
-// Pantalla 3: Detalle del libro (pasa los datos del libro seleccionado)
+// P3: Detalle libro
 @Serializable
 data class RutaDetalleLibro(
     val nombreLibro: String,
@@ -23,14 +19,14 @@ data class RutaDetalleLibro(
     val descripcion: String
 )
 
-// Pantalla 4: Confirmación de reserva
+// P4: Confirmación reserva
 @Serializable
 data class RutaConfirmacionReserva(
     val nombreLibro: String,
     val fecha: String
 )
 
-// Pantalla 8: Éxito final de la renovación de reserva
+// P8: Éxito reserva
 @Serializable
 data class RutaRenovacionExitosa(
     val nombreLibro: String,
