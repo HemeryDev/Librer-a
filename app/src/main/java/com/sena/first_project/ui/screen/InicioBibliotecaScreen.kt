@@ -16,12 +16,12 @@ import com.sena.first_project.ui.components.BotonGeneral
 @Composable
 fun InicioBibliotecaScreen(
     onNavegarLista: () -> Unit,
-    onIrMisReservas: () -> Unit
 ) {
     Column(
         modifier = Modifier
             .fillMaxSize()
             .background(Color.White)
+            .systemBarsPadding()
             .padding(24.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
@@ -51,11 +51,6 @@ fun InicioBibliotecaScreen(
             colorFondo = Color(0xFF4F46E5),
             onClick = onNavegarLista
         )
-        Spacer(modifier = Modifier.height(12.dp))
-        BotonGeneral(
-            texto = "Mis Reservas",
-            colorFondo = Color(0xFF0EA5E9),
-            onClick = onIrMisReservas
-        )
+
     }
 }

@@ -9,8 +9,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.sena.first_project.data.model.RepositorioLibros
-import com.sena.first_project.ui.sections.CatalogoSection
+
 
 @Composable
 fun ListaLibrosScreen(

@@ -14,41 +14,20 @@ data object RutaInicio
 @Serializable
 data object RutaListaLibros
 
-// Pantalla 3: Detalle del libro (recibe el nombre del libro seleccionado)
+// Pantalla 3: Detalle del libro (pasa los datos del libro seleccionado)
 @Serializable
 data class RutaDetalleLibro(
-    val nombreLibro: String
+    val nombreLibro: String,
+    val autor: String,
+    val categoria: String,
+    val descripcion: String
 )
 
-// Pantalla 4: Confirmación de reserva exitosa inicial
+// Pantalla 4: Confirmación de reserva
 @Serializable
 data class RutaConfirmacionReserva(
     val nombreLibro: String,
     val fecha: String
-)
-
-// ==========================================
-// FLUJO 2: MIS RESERVAS Y RENOVACIÓN
-// ==========================================
-
-// Pantalla 5: Lista de reservas activas
-@Serializable
-data object RutaMisReservas
-
-// Pantalla 6: Detalle de la reserva (viajan los 3 parámetros de la práctica)
-@Serializable
-data class RutaDetalleReserva(
-    val nombreLibro: String,
-    val fechaReserva: String,
-    val codigoReserva: String
-)
-
-// Pantalla 7: Pantalla para ingresar la nueva fecha de renovación
-@Serializable
-data class RutaRenovarReserva(
-    val nombreLibro: String,
-    val fechaReserva: String,
-    val codigoReserva: String
 )
 
 // Pantalla 8: Éxito final de la renovación de reserva
