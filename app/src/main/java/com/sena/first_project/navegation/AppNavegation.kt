@@ -5,7 +5,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
-import com.sena.first_project.data.model.RepositorioLibros
 import com.sena.first_project.ui.screen.*
 
 @Composable
@@ -16,15 +15,13 @@ fun AppNavegation() {
         navController = navController,
         startDestination = RutaInicio
     ) {
-        // 1. Inicio Biblioteca
+        // --- FLUJO 1: BIBLIOTECA ---
         composable<RutaInicio> {
             InicioBibliotecaScreen(
-                onNavegarLista = { navController.navigate(RutaListaLibros) },
-                onIrMisReservas = { navController.navigate(RutaMisReservas) }
+                onNavegarLista = { navController.navigate(RutaListaLibros) }
             )
         }
 
-        // 2. Lista de Libros
         composable<RutaListaLibros> {
             ListaLibrosScreen(
                 onNavegarDetalle = { nombre ->
@@ -33,7 +30,6 @@ fun AppNavegation() {
             )
         }
 
-        // 3. Detalle de Libro
         composable<RutaDetalleLibro> { backStackEntry ->
             val ruta: RutaDetalleLibro = backStackEntry.toRoute()
             DetalleLibroScreen(
@@ -50,7 +46,6 @@ fun AppNavegation() {
             )
         }
 
-        // 4. Confirmación de Reserva
         composable<RutaConfirmacionReserva> { backStackEntry ->
             val ruta: RutaConfirmacionReserva = backStackEntry.toRoute()
             ConfirmacionScreen(
@@ -58,13 +53,17 @@ fun AppNavegation() {
                 fecha = ruta.fecha,
                 onVolverInicio = {
                     navController.navigate(RutaInicio) {
-                        popUpTo<RutaInicio> { inclusive = true }
+                        popUpTo<RutaInicio> { inclusive = false }
+                        launchSingleTop = true
                     }
+                },
+                onIrAMisReservas = {
+                    navController.navigate(RutaMisReservas)
                 }
             )
         }
 
-        // 5. Mis Reservas (Muestra reservas activas actualizadas)
+        // --- FLUJO 2: MIS RESERVAS ---
         composable<RutaMisReservas> {
             MisReservasScreen(
                 onVerReserva = { nombre, fecha, codigo ->
@@ -76,11 +75,15 @@ fun AppNavegation() {
                         )
                     )
                 },
-                onVolverInicio = { navController.popBackStack() }
+                onVolverInicio = {
+                    navController.navigate(RutaInicio) {
+                        popUpTo<RutaInicio> { inclusive = false }
+                        launchSingleTop = true
+                    }
+                }
             )
         }
 
-        // 6. Detalle de Reserva
         composable<RutaDetalleReserva> { backStackEntry ->
             val ruta: RutaDetalleReserva = backStackEntry.toRoute()
             DetalleReservaScreen(
@@ -96,22 +99,17 @@ fun AppNavegation() {
                         )
                     )
                 },
-                onCancelarReserva = {
-                    navController.popBackStack()
-                },
+                onCancelarReserva = { navController.popBackStack() },
                 onVolver = { navController.popBackStack() }
             )
         }
 
-        // 7. Renovar Reserva
         composable<RutaRenovarReserva> { backStackEntry ->
             val ruta: RutaRenovarReserva = backStackEntry.toRoute()
             RenovarReservaScreen(
                 nombreLibro = ruta.nombreLibro,
                 fechaActual = ruta.fechaReserva,
                 onConfirmarRenovacion = { fechaNueva ->
-                    // Actualiza la fecha en la lista
-                    RepositorioLibros.renovarFecha(ruta.codigoReserva, fechaNueva)
                     navController.navigate(
                         RutaRenovacionExitosa(
                             nombreLibro = ruta.nombreLibro,
@@ -123,7 +121,6 @@ fun AppNavegation() {
             )
         }
 
-        // 8. Renovación Exitosa
         composable<RutaRenovacionExitosa> { backStackEntry ->
             val ruta: RutaRenovacionExitosa = backStackEntry.toRoute()
             RenovacionExitosaScreen(
@@ -131,7 +128,8 @@ fun AppNavegation() {
                 fechaNueva = ruta.fechaNueva,
                 onVolverMisReservas = {
                     navController.navigate(RutaMisReservas) {
-                        popUpTo<RutaMisReservas> { inclusive = true }
+                        popUpTo<RutaMisReservas> { inclusive = false }
+                        launchSingleTop = true
                     }
                 }
             )

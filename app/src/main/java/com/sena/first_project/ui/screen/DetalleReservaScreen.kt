@@ -11,7 +11,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.sena.first_project.data.model.RepositorioLibros
+import com.sena.first_project.RepositorioLibros
 
 @Composable
 fun DetalleReservaScreen(
@@ -28,7 +28,7 @@ fun DetalleReservaScreen(
         modifier = Modifier
             .fillMaxSize()
             .background(Color.White)
-            .systemBarsPadding() // Corregido: Eleva los botones para que la barra del celular no los tape
+            .systemBarsPadding()
             .padding(18.dp)
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
@@ -66,7 +66,7 @@ fun DetalleReservaScreen(
         ) {
             Column(modifier = Modifier.padding(16.dp)) {
                 Text(text = "Nombre: $nombreLibro", fontWeight = FontWeight.Bold, fontSize = 16.sp)
-                Text(text = "Autor: ${libro?.autor ?: "Desconocido"}", color = Color(0xFF64748B), fontSize = 13.sp)
+                Text(text = "Autor: ${libro?.autor ?: "Robert C. Martin"}", color = Color(0xFF64748B), fontSize = 13.sp)
                 Spacer(modifier = Modifier.height(8.dp))
                 Text(text = "Fecha Reserva: $fechaReserva", fontSize = 14.sp)
                 Text(
@@ -103,10 +103,7 @@ fun DetalleReservaScreen(
                 Text("🔄 Renovar", fontWeight = FontWeight.Bold)
             }
             Button(
-                onClick = {
-                    RepositorioLibros.cancelarReserva(codigoReserva)
-                    onCancelarReserva()
-                },
+                onClick = onCancelarReserva,
                 modifier = Modifier
                     .weight(1f)
                     .height(48.dp),

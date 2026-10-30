@@ -10,25 +10,23 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.sena.first_project.data.model.Libro
+import com.sena.first_project.Libro
 
 @Composable
 fun CardLibro(
     libro: Libro,
-    onVerDetalle: () -> Unit
+    onClick: () -> Unit
 ) {
     Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(vertical = 6.dp),
+        modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(12.dp),
         colors = CardDefaults.cardColors(containerColor = Color(0xFFF8FAFC)),
-        elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
+        elevation = CardDefaults.cardElevation(2.dp)
     ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(14.dp),
+                .padding(16.dp),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
@@ -46,16 +44,10 @@ fun CardLibro(
                 )
             }
             Button(
-                onClick = onVerDetalle,
-                shape = RoundedCornerShape(8.dp),
-                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFEEF2FF))
+                onClick = onClick,
+                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFE2E8F0))
             ) {
-                Text(
-                    text = "Ver Detalle",
-                    color = Color(0xFF4F46E5),
-                    fontWeight = FontWeight.SemiBold,
-                    fontSize = 12.sp
-                )
+                Text("Ver Detalle", color = Color(0xFF334155))
             }
         }
     }

@@ -20,13 +20,14 @@ fun RenovarReservaScreen(
     onConfirmarRenovacion: (String) -> Unit,
     onVolver: () -> Unit
 ) {
-    // Estado reactivo que almacena la nueva fecha
-    var nuevaFecha by remember { mutableStateOf("30/06/2026") }
+    // Usamos guiones o formato limpio para que el router de Compose no confunda el '/' con otra ruta
+    var nuevaFecha by remember { mutableStateOf("30-06-2026") }
 
     Column(
         modifier = Modifier
             .fillMaxSize()
             .background(Color.White)
+            .systemBarsPadding()
             .padding(18.dp)
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
@@ -60,7 +61,6 @@ fun RenovarReservaScreen(
         Text(text = "Nueva Fecha:", fontWeight = FontWeight.SemiBold, fontSize = 14.sp)
         Spacer(modifier = Modifier.height(6.dp))
 
-        // Campo reactivo: value lee y onValueChange muta el estado
         OutlinedTextField(
             value = nuevaFecha,
             onValueChange = { nuevoValor -> nuevaFecha = nuevoValor },
@@ -74,7 +74,11 @@ fun RenovarReservaScreen(
         BotonGeneral(
             texto = "✔ Confirmar Renovación",
             colorFondo = Color(0xFFEA580C),
-            onClick = { onConfirmarRenovacion(nuevaFecha) }
+            onClick = {
+                // Aseguramos que si el usuario escribe barras '/', se conviertan en guiones
+                val fechaSegura = nuevaFecha.replace("/", "-")
+                onConfirmarRenovacion(fechaSegura)
+            }
         )
     }
 }

@@ -9,7 +9,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-
+import com.sena.first_project.ui.sections.CatalogoSection
 
 @Composable
 fun ListaLibrosScreen(
@@ -19,6 +19,7 @@ fun ListaLibrosScreen(
         modifier = Modifier
             .fillMaxSize()
             .background(Color.White)
+            .systemBarsPadding()
             .padding(16.dp)
     ) {
         Text(
@@ -32,12 +33,14 @@ fun ListaLibrosScreen(
             fontSize = 13.sp,
             color = Color(0xFF64748B)
         )
+
         Spacer(modifier = Modifier.height(16.dp))
 
-        // Consumo de la sección creada en el Paso 4
+        // AQUÍ VA EXACTAMENTE:
         CatalogoSection(
-            libros = RepositorioLibros.listaLibros,
-            onSeleccionarLibro = { nombre -> onNavegarDetalle(nombre) }
+            onSeleccionarLibro = { nombre ->
+                onNavegarDetalle(nombre)
+            }
         )
     }
 }

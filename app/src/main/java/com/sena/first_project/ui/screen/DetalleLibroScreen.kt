@@ -11,7 +11,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.sena.first_project.data.model.RepositorioLibros
+import com.sena.first_project.RepositorioLibros
 import com.sena.first_project.ui.components.BotonGeneral
 
 @Composable
@@ -27,7 +27,7 @@ fun DetalleLibroScreen(
         modifier = Modifier
             .fillMaxSize()
             .background(Color.White)
-            .systemBarsPadding() // Evita que la barra de estado y navegación tapen la UI
+            .systemBarsPadding()
             .padding(20.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
@@ -78,8 +78,7 @@ fun DetalleLibroScreen(
             texto = "Reservar Libro",
             colorFondo = Color(0xFFEA580C),
             onClick = {
-                // Guarda la reserva de forma dinámica
-                RepositorioLibros.agregarReserva(libro.nombre, "15/06/2026")
+                // Solo navega pasando los argumentos, sin persistir nada
                 onReservar(libro.nombre, "15/06/2026")
             }
         )
